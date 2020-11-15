@@ -218,9 +218,19 @@ function generateMap(seed) {
   randomisedLetters.forEach((letter, index) => {
     map[letter] = symbols[index];
   });
-  console.log(seed);
   console.log(map);
   return map;
+}
+
+function encrypt(msg, map) {
+  msg = msg.toUpperCase();
+  var encrypted = "";
+  for (var i = 0; i < msg.length; i++) {
+    // if (!(msg.charAt(i) in map))
+    //   return "Error!! Invalid characters in message!";
+    encrypted += map[msg.charAt(i)];
+  }
+  return encrypted;
 }
 
 function App() {
@@ -250,7 +260,10 @@ function App() {
     } else setSeed(evt.target.value);
   };
 
-  const handleMessageInput = (evt) => {};
+  const handleMessageInput = (evt) => {
+    setMessage(evt.target.value);
+    setCode(encrypt(evt.target.value, map));
+  };
 
   const handleCodeInput = (evt) => {};
 
@@ -273,6 +286,7 @@ function App() {
           <div>English</div>
           <textarea
             placeholder="Enter your message"
+            value={message}
             onChange={handleMessageInput}
           ></textarea>
         </div>
@@ -280,6 +294,7 @@ function App() {
           <div>Symbolic</div>
           <textarea
             placeholder="Enter symbolic code"
+            value={code}
             onChange={handleCodeInput}
           ></textarea>
         </div>
