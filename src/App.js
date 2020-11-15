@@ -212,6 +212,14 @@ const letters = [
 ];
 
 function App() {
+  const [seed, setSeed] = useState(
+    Math.random()
+      .toString(36)
+      .replace(/[^a-z]+/g, "")
+      .substr(0, 5)
+  );
+  useEffect(() => {}, []);
+
   return (
     <Container>
       <Title>
@@ -219,7 +227,7 @@ function App() {
       </Title>
       <SeedInput>
         <span>Seed:</span>
-        <input type="text" placeholder="Enter seed" />
+        <input type="text" placeholder="Enter seed" value={seed} />
       </SeedInput>
       <View>
         <div className="card">
