@@ -1,5 +1,6 @@
 import "./App.css";
 import styled from "styled-components";
+import shuffleSeed from "shuffle-seed";
 
 import background from "./assets/bg.jpg";
 import { useEffect, useState } from "react";
@@ -211,6 +212,17 @@ const letters = [
   " ",
 ];
 
+function generateMap(seed) {
+  var randomisedLetters = shuffleSeed.shuffle(letters, seed);
+  var map = {};
+  randomisedLetters.forEach((letter, index) => {
+    map[letter] = symbols[index];
+  });
+  console.log(seed);
+  console.log(map);
+  return map;
+}
+
 function App() {
   const [seed, setSeed] = useState(
     Math.random()
@@ -218,7 +230,29 @@ function App() {
       .replace(/[^a-z]+/g, "")
       .substr(0, 5)
   );
-  useEffect(() => {}, []);
+
+  const [message, setMessage] = useState("");
+  const [code, setCode] = useState("");
+
+  const [map, setMap] = useState({});
+  useEffect(() => {
+    setMap(generateMap(seed));
+  }, [seed]);
+
+  const handleSeedInput = (evt) => {
+    if (evt.target.value.length == 0) {
+      setSeed(
+        Math.random()
+          .toString(36)
+          .replace(/[^a-z]+/g, "")
+          .substr(0, 5)
+      );
+    } else setSeed(evt.target.value);
+  };
+
+  const handleMessageInput = (evt) => {};
+
+  const handleCodeInput = (evt) => {};
 
   return (
     <Container>
@@ -227,16 +261,27 @@ function App() {
       </Title>
       <SeedInput>
         <span>Seed:</span>
-        <input type="text" placeholder="Enter seed" value={seed} />
+        <input
+          type="text"
+          placeholder="Enter seed"
+          value={seed}
+          onChange={handleSeedInput}
+        />
       </SeedInput>
       <View>
         <div className="card">
           <div>English</div>
-          <textarea placeholder="Enter your message"></textarea>
+          <textarea
+            placeholder="Enter your message"
+            onChange={handleMessageInput}
+          ></textarea>
         </div>
         <div className="card">
           <div>Symbolic</div>
-          <textarea placeholder="Enter symbolic code"></textarea>
+          <textarea
+            placeholder="Enter symbolic code"
+            onChange={handleCodeInput}
+          ></textarea>
         </div>
       </View>
     </Container>
