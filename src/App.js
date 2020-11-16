@@ -259,7 +259,7 @@ function App() {
   }, [seed]);
 
   const handleSeedInput = (evt) => {
-    setSeed(evt.target.value);
+    setSeed(evt.target.value.toLowerCase());
   };
 
   const handleSeedBlur = (evt) => {
