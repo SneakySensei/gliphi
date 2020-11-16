@@ -259,6 +259,10 @@ function App() {
   }, [seed]);
 
   const handleSeedInput = (evt) => {
+    setSeed(evt.target.value);
+  };
+
+  const handleSeedBlur = (evt) => {
     if (evt.target.value.length == 0) {
       setSeed(
         Math.random()
@@ -266,7 +270,7 @@ function App() {
           .replace(/[^a-z]+/g, "")
           .substr(0, 5)
       );
-    } else setSeed(evt.target.value);
+    }
   };
 
   const handleMessageInput = (evt) => {
@@ -291,6 +295,7 @@ function App() {
           placeholder="Enter seed"
           value={seed}
           onChange={handleSeedInput}
+          onBlur={handleSeedBlur}
         />
       </SeedInput>
       <View>
