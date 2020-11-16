@@ -218,7 +218,6 @@ function generateMap(seed) {
   randomisedLetters.forEach((letter, index) => {
     map[letter] = symbols[index];
   });
-  console.log(map);
   return map;
 }
 
@@ -226,11 +225,21 @@ function encrypt(msg, map) {
   msg = msg.toUpperCase();
   var encrypted = "";
   for (var i = 0; i < msg.length; i++) {
-    // if (!(msg.charAt(i) in map))
-    //   return "Error!! Invalid characters in message!";
+    if (!(msg.charAt(i) in map))
+      return "Error!! Invalid characters in message!";
     encrypted += map[msg.charAt(i)];
   }
   return encrypted;
+}
+
+function decrypt(code, map) {
+  var decrypted = "";
+  for (var i = 0; i < code.length; i++) {
+    // if (!(msg.charAt(i) in map))
+    //   return "Error!! Invalid characters in message!";
+    decrypted += Object.keys(map)[Object.values(map).indexOf(code.charAt(i))];
+  }
+  return decrypted;
 }
 
 function App() {
@@ -265,7 +274,10 @@ function App() {
     setCode(encrypt(evt.target.value, map));
   };
 
-  const handleCodeInput = (evt) => {};
+  const handleCodeInput = (evt) => {
+    setCode(evt.target.value);
+    setMessage(decrypt(evt.target.value, map));
+  };
 
   return (
     <Container>
