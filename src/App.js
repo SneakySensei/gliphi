@@ -67,8 +67,9 @@ const SeedInput = styled.div`
     }
   }
   span {
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 0.1rem;
     margin-right: 0.5rem;
-    font-weight: bold;
   }
 `;
 const View = styled.div`
@@ -80,7 +81,7 @@ const View = styled.div`
   gap: 1rem;
   align-items: stretch;
   width: 100%;
-  padding: 0 1rem 2rem 1rem;
+  padding: 0 1rem 1rem 1rem;
   flex: 1;
 
   @media (max-width: 768px) {
@@ -101,9 +102,10 @@ const View = styled.div`
     }
 
     div {
-      font-weight: bold;
+      /* font-weight: bold; */
       margin: 0 0 0.5rem 1rem;
       font-family: "Orbitron";
+      letter-spacing: 0.1rem;
     }
   }
 
@@ -123,6 +125,21 @@ const View = styled.div`
     &:active {
       outline: none;
     }
+  }
+`;
+const Footer = styled.div`
+  text-align: center;
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 0.1rem;
+  font-size: 11pt;
+  font-weight: bold;
+  padding-bottom: 1rem;
+  color: white;
+  position: relative;
+  span {
+    font-size: 15pt;
+    line-height: 11pt;
+    animation: shine 1.5s forwards, flicker 3s infinite, blink 10s 1s infinite;
   }
 `;
 
@@ -322,6 +339,9 @@ function App() {
           ></textarea>
         </div>
       </View>
+      <Footer>
+        Made with <span>♡</span> by Snehil
+      </Footer>
     </Container>
   );
 }
