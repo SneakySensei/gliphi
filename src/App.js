@@ -235,8 +235,8 @@ function encrypt(msg, map) {
 function decrypt(code, map) {
   var decrypted = "";
   for (var i = 0; i < code.length; i++) {
-    // if (!(msg.charAt(i) in map))
-    //   return "Error!! Invalid characters in message!";
+    if (!Object.values(map).includes(code.charAt(i)))
+      return "Error!! Invalid characters in code!";
     decrypted += Object.keys(map)[Object.values(map).indexOf(code.charAt(i))];
   }
   return decrypted;
